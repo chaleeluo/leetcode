@@ -46,6 +46,7 @@ def firstuniqchar(s):
 			return i
 	return -1
 
+
 # 场景三： 通过i,j来推断这个点在哪个3*3网格内   3*(i//3)+(j//3) ###################################################
 # 36. 有效的数独 : 判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。
 # 数字 1-9 在每一行只能出现一次。数字 1-9 在每一列只能出现一次。数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
@@ -64,29 +65,63 @@ def firstuniqchar(s):
 ]
 输出: true
 '''
-def isValidSudoku(self, board):
-    dic_row = [{},{},{},{},{},{},{},{},{}] 
-    dic_col = [{},{},{},{},{},{},{},{},{}] 
-    dic_box = [{},{},{},{},{},{},{},{},{}] 
-    
-    for i in range(len(board)):
-        for j in range(len(board)):
-            num = board[i][j]
-            if num == ".":
-                continue
-            if num not in dic_row[i] and num not in dic_col[j] and num not in dic_box[3*(i//3)+(j//3)]:
-                dic_row[i][num] = 1
-                dic_col[j][num] = 1
-                dic_box[3*(i//3)+(j//3)][num] =      1 # 利用地板除 向下取余,将矩阵划分为九块
-            else:
-                return False
-    return True
+def isValidSudoku(board):
+  dic_row = [{},{},{},{},{},{},{},{},{}] 
+  dic_col = [{},{},{},{},{},{},{},{},{}] 
+  dic_box = [{},{},{},{},{},{},{},{},{}] 
+  
+  for i in range(len(board)):
+      for j in range(len(board)):
+          num = board[i][j]
+          if num == ".":
+              continue
+          if num not in dic_row[i] and num not in dic_col[j] and num not in dic_box[3*(i//3)+(j//3)]:
+              dic_row[i][num] = 1
+              dic_col[j][num] = 1
+              dic_box[3*(i//3)+(j//3)][num] = 1 # 利用地板除 向下取余,将矩阵划分为九块
+          else:
+              return False
+  return True
 
 
+# 场景四： map(函数f，list)，把函数f 依次作用在list 的每个元素上，返回一个新的list ###################################
+#         zip为打包为元祖，*zip为解压元祖。                  ####################################################
+#         filter(函数f，list)，把函数f 依次作用在list 的每个元素上，返回函数f 判断为true的一个新list #################
+
+a, b, c = 'flower', 'flow', 'flight'     # 三个对象
+fs = ['flower', 'flow', 'flight']        # 一个对象
+mat = []
+mat[:] = map(list, zip(*fs))
+'''
+list(zip(a, b, c)) =  [('f', 'f', 'f'), ('l', 'l', 'l'), ('o', 'o', 'i'), ('w', 'w', 'g')]     
+list(zip(*fs) =  [('f', 'f', 'f'), ('l', 'l', 'l'), ('o', 'o', 'i'), ('w', 'w', 'g')]
+mat = [['f', 'f', 'f'], ['l', 'l', 'l'], ['o', 'o', 'i'], ['w', 'w', 'g']]
+'''
+# 48. 旋转图像 : 给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。原地！！！
+'''
+输入:
+matrix = [[1,2,3],
+          [4,5,6],
+          [7,8,9]]
+输出: [[7,4,1],
+      [8,5,2],
+      [9,6,3]]
+'''
+def rotate(matrix):
+  matrix[:] = map(list, zip(*matrix[::-1]))
+
+# 125. 验证回文串 : 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+'''
+输入:"A man, a plan, a canal: Panama"
+输出: true
+'''
+def ispalindrome(s):
+  s = list(filter(str.isalnum, s.lower()))
+  return s == s[::-1]
 
 
-
-
+# 场景五： 字典返回对应的值或者不存在返回-1     字典.get(键, -1)  #############################################
+#         字符串返回索引或者不存在返回-1     str.find(str, beg=0, end=len(string)) ##########################
 
 
 

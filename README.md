@@ -33,4 +33,7 @@
 
 
 ### tricks
-##### tricks1.py
+##### tricks1.py 
+###### 基本数据类型
+##### tricks1.py 
+###### 函数
